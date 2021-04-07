@@ -1,62 +1,22 @@
 import React from 'react';
-import TopBar from "./cmps/TopBar";
-import axios from 'axios';
+import {HashRouter as Router, Switch, Route} from 'react-router-dom';
+
 import "./css/App.scss";
+import LoginPage from './cmps/LoginPage';
+import ColeccionesPage from './cmps/ColeccionesPage';
+
 class App extends React.Component{
   
-  //Estado del componente
-  constructor()
-  {
-    super();
-
-    this.state = {
-      "UsrUsr":"",
-      "UsrPwd":"",
-      "errorMessage":""
-    }
-  }
-  //Metodo landan
-  onLoginClick = e =>{
-    let UsrUsr = this.state.UsrUsr;
-    let UsrPwd = this.state.UsrPwd;
-    
-    axios.defaults.withCredentials = true;
-    axios.post("http://192.168.0.254/api/usuarios/login.php",{
-      UsrUsr: UsrUsr,
-      UsrPwd: UsrPwd
-    }).then(res =>{
-      let jres = res.data;
-      //Respuesta del servisor
-      //console.log(res);
-      if (jres.status === "OK") {
-        
-      }else{
-        this.setState({errorMessage: jres.payload.message});
-      }
-    });
-  }
-
   render(){
     return(
-      <div className="App">
-        <TopBar/>
-        <div className="LogoContainer" >
-          <div className="Logo"/>
-        </div>
-        <div className="FormContainer" >
-            <div className="LoginForm">
-              <div className="FieldContainer">
-                  <input type="text" id="UsUsr" onChange={e =>this.setState({UsrUsr: e.target.value})} value={this.state.UsrUsr} placeholder="Usuario" autoComplete="new-password" ></input>
-              </div>
-              <div className="FieldContainer">
-                  <input type="password" id="UsrPswd" onChange={e =>this.setState({UsrPwd: e.target.value})} value={this.state.UsrPwd} placeholder="Contraseña" autoComplete="new-password"/>
-              </div>
-              <div className="ErrorMessage">{this.state.errorMessage}</div>
-              <div className="FieldContainer">
-                  <div onClick={this.onLoginClick} className="Button">Acceder</div>
-              </div>
-            </div>
-        </div>  
+      <div className="App" id="picme-app">
+        <Router>
+          <Switch>
+            <Route path="/" exact > <LoginPage/> </Route>
+            <Route path="/colecciones" exact ><ColeccionesPage/></Route>
+          </Switch>
+        </Router>
+        
       </div>
     );
   }
