@@ -1,8 +1,41 @@
 import React from 'react';
 import TopBar from "./cmps/TopBar";
-
+import axios from 'axios';
 import "./css/App.scss";
 class App extends React.Component{
+  
+  //Estado del componente
+  constructor()
+  {
+    super();
+
+    this.state = {
+      "UsrUsr":"",
+      "UsrPwd":"",
+      "errorMessage":""
+    }
+  }
+  //Metodo landan
+  onLoginClick = e =>{
+    let UsrUsr = this.state.UsrUsr;
+    let UsrPwd = this.state.UsrPwd;
+    
+    axios.defaults.withCredentials = true;
+    axios.post("http://192.168.0.254/api/usuarios/login.php",{
+      UsrUsr: UsrUsr,
+      UsrPwd: UsrPwd
+    }).then(res =>{
+      let jres = res.data;
+      //Respuesta del servisor
+      //console.log(res);
+      if (jres.status === "OK") {
+        
+      }else{
+        this.setState({errorMessage: jres.payload.message});
+      }
+    });
+  }
+
   render(){
     return(
       <div className="App">
@@ -13,13 +46,14 @@ class App extends React.Component{
         <div className="FormContainer" >
             <div className="LoginForm">
               <div className="FieldContainer">
-                  <input type="text" id="UsUsr" placeholder="Usuario" ></input>
+                  <input type="text" id="UsUsr" onChange={e =>this.setState({UsrUsr: e.target.value})} value={this.state.UsrUsr} placeholder="Usuario" autoComplete="new-password" ></input>
               </div>
               <div className="FieldContainer">
-                  <input type="paswword" id="UsrPswd" placeholder="Contraseña" />
+                  <input type="password" id="UsrPswd" onChange={e =>this.setState({UsrPwd: e.target.value})} value={this.state.UsrPwd} placeholder="Contraseña" autoComplete="new-password"/>
               </div>
+              <div className="ErrorMessage">{this.state.errorMessage}</div>
               <div className="FieldContainer">
-                  <div className="Button">Acceder</div>
+                  <div onClick={this.onLoginClick} className="Button">Acceder</div>
               </div>
             </div>
         </div>  

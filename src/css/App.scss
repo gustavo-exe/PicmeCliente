@@ -33,7 +33,15 @@
                     color: #fff;
                     padding: 1rem;
                 }
+                .Button:hover{
+                    background-color: aquamarine;
+                }
                 
+            }
+            .ErrorMessage{
+                color: #a00303;
+                font-size: 0.7rem;
+                font-weight: bold;
                 
             }
         }
