@@ -21,7 +21,7 @@ class LoginPage extends React.Component{
         let UsrPwd = this.state.UsrPwd;
         
         axios.defaults.withCredentials = true;
-        axios.post("http://192.168.0.254/api/usuarios/login.php",{
+        axios.post("https://api.movil2.cointla.com/api/usuarios/login.php",{
         UsrUsr: UsrUsr,
         UsrPwd: UsrPwd
         }).then(res =>{
