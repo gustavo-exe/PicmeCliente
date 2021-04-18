@@ -45,6 +45,7 @@ class LoginPage extends React.Component{
             </div>
             <div className="FormContainer" >
                 <div className="LoginForm">
+                <p>Ingresar</p>
                 <div className="FieldContainer">
                     <input type="text" id="UsUsr" onChange={e =>this.setState({UsrUsr: e.target.value})} value={this.state.UsrUsr} placeholder="Usuario" autoComplete="new-password" ></input>
                 </div>

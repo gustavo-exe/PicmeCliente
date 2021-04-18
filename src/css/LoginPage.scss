@@ -1,40 +1,52 @@
+@import 'Vars';
 .LoginPage{
     height: 100%;
 
     .LogoContainer{
         text-align: center;
-        padding: 2rem;
+        padding: 2rem 2rem 0rem 2rem;
         .Logo{
             display: inline-block;
             height: 10rem;
             width: 10rem;
-            background-color: rgb(117, 117, 117);
+            background: transparent url('../imgs/Collage_Imagotipo.svg') no-repeat center;
+            background-size: 100% 100%;
         }
     }
 
     .FormContainer
     {
         text-align: center;
+        
 
         .LoginForm{
+            p{
+                text-align: left;
+                padding: 0rem 0rem 0rem 0.6rem;
+                margin: 0%;
+            }
+
             display: inline-block;
 
             .FieldContainer{
-                padding: 0.6rem;
+                padding: 0.3rem;
+                align-items: center;
                 
 
                 input{
-                    padding: 0.7rem;
+                    
+                    padding: 0.6rem;
+                    
+                    background-color: transparent;
+                    border: 0;
+                    border-bottom: #000 solid 1px;
                     width: calc(100% - 1.9rem);
                 }
 
                 .Button{
-                    background-color: #00519C;
+                    background-color: $EmphasisColor;
                     color: #fff;
-                    padding: 1rem;
-                }
-                .Button:hover{
-                    background-color: aquamarine;
+                    padding: 0.3rem;
                 }
                 
             }
