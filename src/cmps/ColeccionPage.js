@@ -62,6 +62,8 @@ class ColeccionPage extends React.Component{
 
     loadData = ColCod =>{
 		//Consulta
+		var _this = this;
+
 		axios.defaults.withCredentials = true;
 		axios.post("https://api.movil2.cointla.com/api/colecciones/obtener.php", {
             ColCod: ColCod
@@ -77,8 +79,20 @@ class ColeccionPage extends React.Component{
 					if (Object.hasOwnProperty.call(jres.payload.fotos, key)) {
 						const foto = jres.payload.fotos[key];
                         let foto_url = "https://api.movil2.cointla.com/data"+foto.FotPath;
+						
+						let onDeleteClick = e =>{
+							axios.post("https://api.movil2.cointla.com/api/fotos/eliminar.php", {
+								ColCod: ColCod,
+								FotCod: foto.FotCod
+							}).then(res => {
+								_this.loadData(_this.props.ColCod);
+							});
+						}
+
 						col_fotos.push(
-							<div className="CoverImage" key={foto.FotCod} id={foto.FotCod} style={{backgroundImage: "url("+foto_url+")"}}></div>
+							<div className="CoverImage" key={foto.FotCod} id={foto.FotCod} style={{backgroundImage: "url("+foto_url+")"}}>
+								<div className="DeleteIcon" onClick={onDeleteClick}><i className="material-icons">delete</i></div>
+							</div>
 						);
 					}
 				}

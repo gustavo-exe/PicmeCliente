@@ -14,7 +14,17 @@
             height: 30vh;
             background-size: cover;
             background-position: center;
+           
+            .DeleteIcon{
+                background-color: rgba(0, 0, 0, 0.432);
+                display: inline-block;
+                margin-top: 0.1rem;
+                margin-left: 0.1rem;
+                color: #fff;
+            }
         }
+
+        
     }
 
     .AddFoto{
