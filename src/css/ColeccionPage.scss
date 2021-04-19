@@ -1,0 +1,17 @@
+.ColeccionPage{
+    .ContainerImage{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 1%;
+        
+        .CoverImage{
+            margin: 0.2rem;
+            width: 30vw;
+            height: 30vh;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+}

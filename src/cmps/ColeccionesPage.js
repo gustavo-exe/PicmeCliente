@@ -17,6 +17,10 @@ class ColeccionesPage extends React.Component{
 		this.loadData();
 	}
 
+	onColeccionClick = e =>{
+		let ColCod = e.target.id;
+		window.location = "#/coleccion/"+ColCod;
+	}
 	render(){
 		return (
 			<div className="ColeccionesPage">
@@ -34,14 +38,14 @@ class ColeccionesPage extends React.Component{
 			
 			if (jres.status === "OK") {
 				let cols_divs =[];
-				console.log(jres);
+				//console.log(jres);
 				//Recorrido de las coleecions y armado de cada item que se mostrata
 				//como la coleccion
 				for (const key in jres.payload) {
 					if (Object.hasOwnProperty.call(jres.payload, key)) {
 						const coleccion = jres.payload[key];
 						cols_divs.push(
-							<div className="Coleccion" key={coleccion.ColCod} id={coleccion.ColCod} >
+							<div className="Coleccion" key={coleccion.ColCod} id={coleccion.ColCod} onClick={this.onColeccionClick}>
 								<div className="Descripcion" >{coleccion.ColDsc}</div>
 								<div className="Icono" ><i className="material-icons" >arrow_forward_ios</i></div>
 							</div>

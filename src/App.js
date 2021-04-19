@@ -4,6 +4,7 @@ import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 import "./css/App.scss";
 import LoginPage from './cmps/LoginPage';
 import ColeccionesPage from './cmps/ColeccionesPage';
+import Coleccion from './cmps/ColeccionPage';
 
 class App extends React.Component{
   
@@ -14,6 +15,7 @@ class App extends React.Component{
           <Switch>
             <Route path="/" exact > <LoginPage/> </Route>
             <Route path="/colecciones" exact ><ColeccionesPage/></Route>
+            <Route path="/coleccion/:ColCod" exact ><Coleccion/></Route>
           </Switch>
         </Router>
         
