@@ -9,7 +9,9 @@ class ColeccionesPage extends React.Component{
 
 		this.state = {
 			cols_divs:"",
-            errorMessage:""
+            errorMessage:"",
+			ColNom: "",
+			showAddColeccion: "none"
 		}
 	}
 
@@ -21,10 +23,51 @@ class ColeccionesPage extends React.Component{
 		let ColCod = e.target.id;
 		window.location = "#/coleccion/"+ColCod;
 	}
+
+	onCreateClick = e =>{
+		var _this = this;
+		axios.post("https://api.movil2.cointla.com/api/colecciones/crear.php", {
+			ColNom: this.state.ColNom,
+			ColDsc: this.state.ColNom
+		}).then(res => {
+			_this.loadData();
+			this.setState({showAddColeccion: "none", ColNom: ""});
+
+		});
+	}
+
+	onCancelClick = e =>{
+		this.setState({
+			showAddColeccion: "none"
+		});
+	}
+
+	onAddColeccionClick = e =>{
+		this.setState({
+			showAddColeccion: "flex"
+		});
+	}
+
 	render(){
 		return (
 			<div className="ColeccionesPage">
 				<TopBar />
+
+				<div className="AddColeccionForm" style={{display: this.state.showAddColeccion}}>
+					<div className="Container">
+						<h3>Crear coleccion</h3>
+						<div className="NombreInput">
+							<input placeholder="Nombre de la colección." onChange={e=>this.setState({ColNom: e.target.value})} value={this.state.ColNom} ></input>
+						</div>
+						<div className="Opciones" >
+							<div className="CancelButton" onClick={this.onCancelClick} >Cancelar</div>
+							<div className="CrearButton" onClick={this.onCreateClick} >Crear</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div className="AddColeccion"  onClick={this.onAddColeccionClick} ><i className="material-icons">add_circle_outline</i></div>
 				{this.state.cols_divs}
 			</div>
 		);
