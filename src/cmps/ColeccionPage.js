@@ -18,12 +18,42 @@ class ColeccionPage extends React.Component{
         this.loadData(this.props.ColCod);
     }
 
+	onAddFotoClick = e =>{
+		document.getElementById("file").click();
+	} 
+
+	onFotoSelected = e =>{
+		var imageFile = document.getElementById("file");
+		let fileSize = imageFile.files[0].size;
+		if (fileSize <= 19000000) {
+			var formData = new FormData();
+			formData.append("ColCod", this.props.ColCod);
+			formData.append("FotFile",imageFile.files[0]);
+			var _this = this;
+
+			axios.post("https://api.movil2.cointla.com/api/fotos/crear.php", formData, {
+				headers: {
+					'Content-Type':'multipart/form-data'
+				}
+			}).then(res=>{
+				_this.loadData(_this.props.ColCod);
+			})
+		}else{
+			alert("¡La fotografia es muy pesada! 20MB Máximo");
+		}
+	}
+
     render(){
         return(
             <div className="ColeccionPage" >
                 <TopBar/>
                 <h2 className="Title">{this.state.col_name}</h2>
-                <div className="ContainerImage" >
+                
+				<input type="file" onChange={this.onFotoSelected} name="file" id="file" style={{display: "none"}}  />
+				<div className="AddFoto" onClick={this.onAddFotoClick} >
+					<i className="material-icons"> add_a_photo</i>
+				</div>
+				<div className="ContainerImage" >
                     {this.state.col_fotos}
                 </div>
             </div>
