@@ -46,7 +46,7 @@ class ColeccionPage extends React.Component{
     render(){
         return(
             <div className="ColeccionPage" >
-                <TopBar/>
+                <TopBar backTo="#/colecciones" />
                 <h2 className="Title">{this.state.col_name}</h2>
                 
 				<input type="file" onChange={this.onFotoSelected} name="file" id="file" style={{display: "none"}}  />
