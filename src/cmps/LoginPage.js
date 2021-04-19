@@ -30,6 +30,7 @@ class LoginPage extends React.Component{
             //console.log(res);
             if (jres.status === "OK") {
                 window.location = "#/colecciones";
+                window.localStorage.setItem("logued","OK");
             }else{
                 this.setState({errorMessage: jres.payload.message});
             }

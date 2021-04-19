@@ -5,10 +5,15 @@ import '../css/TopBar.scss';
 class TopBar extends React.Component{
     constructor(){
 		super();
+        let isLogued = localStorage.getItem("logued");
+		if(!isLogued){
+			window.location = "#/";
+		}
 
 		this.state = {
 			backTo: "",
-            deleteCol: ""
+            deleteCol: "",
+            logout: ""
 		}
 	}
 
@@ -23,6 +28,11 @@ class TopBar extends React.Component{
 			window.location = this.props.backTo;
 		});
 	}
+
+    onLogoutClick = e =>{
+        window.localStorage.removeItem("logued");
+		window.location = "#/";
+    }
     
     componentDidMount(){
         console.log(this.props);
@@ -39,6 +49,13 @@ class TopBar extends React.Component{
 			})
 		}
 
+        let isLogued = localStorage.getItem("logued");
+		if((this.props.backTo === undefined) && (this.props.deleteCol === undefined) && isLogued){
+			this.setState({
+				logout: (<div onClick={this.onLogoutClick} className="logoutIcon"><i className="material-icons">logout</i></div>)
+			})
+		}
+
     }
     render(){
         return(
@@ -47,6 +64,7 @@ class TopBar extends React.Component{
                     {this.state.backTo}
                     
                 </div>
+                {this.state.logout}
                 {this.state.deleteCol}
             </div>
         );
