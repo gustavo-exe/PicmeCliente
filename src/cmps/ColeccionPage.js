@@ -43,6 +43,7 @@ class ColeccionPage extends React.Component{
 		}
 	}
 
+
     render(){
         return(
             <div className="ColeccionPage"  >

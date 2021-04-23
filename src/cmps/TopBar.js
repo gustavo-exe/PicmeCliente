@@ -13,7 +13,8 @@ class TopBar extends React.Component{
 		this.state = {
 			backTo: "",
             deleteCol: "",
-            logout: ""
+            logout: "",
+            encabezado:""
 		}
 	}
 
@@ -56,13 +57,19 @@ class TopBar extends React.Component{
 			})
 		}
 
+        if(this.props.encabezado !== undefined){
+			this.setState({
+				encabezado: (<div className="Encabezado">{this.props.encabezado}</div>)
+			})
+		}
+
     }
     render(){
         return(
             <div className="TopBar" >
-                <div className="BackToNombre" >
+                <div className="BackToEncabezado" >
+                    {this.state.encabezado}
                     {this.state.backTo}
-                    
                 </div>
                 {this.state.logout}
                 {this.state.deleteCol}

@@ -11,6 +11,7 @@ class ColeccionesPage extends React.Component{
 			cols_divs:"",
             errorMessage:"",
 			ColNom: "",
+			ColDsc: "",
 			showAddColeccion: "none"
 		}
 	}
@@ -28,10 +29,10 @@ class ColeccionesPage extends React.Component{
 		var _this = this;
 		axios.post("https://api.movil2.cointla.com/api/colecciones/crear.php", {
 			ColNom: this.state.ColNom,
-			ColDsc: this.state.ColNom
+			ColDsc: this.state.ColDsc
 		}).then(res => {
 			_this.loadData();
-			this.setState({showAddColeccion: "none", ColNom: ""});
+			this.setState({showAddColeccion: "none", ColNom: "", ColDsc: ""});
 
 		});
 	}
@@ -51,13 +52,14 @@ class ColeccionesPage extends React.Component{
 	render(){
 		return (
 			<div className="ColeccionesPage">
-				<TopBar />
+				<TopBar encabezado="Colecciones" />
 
 				<div className="AddColeccionForm" style={{display: this.state.showAddColeccion}}>
 					<div className="Container">
 						<h3>Crear coleccion</h3>
 						<div className="NombreInput">
 							<input placeholder="Nombre de la colección." onChange={e=>this.setState({ColNom: e.target.value})} value={this.state.ColNom} ></input>
+							<input placeholder="Descrpcion." onChange={e=>this.setState({ColDsc: e.target.value})} value={this.state.ColDsc} ></input>
 						</div>
 						<div className="Opciones" >
 							<div className="CancelButton" onClick={this.onCancelClick} >Cancelar</div>
@@ -89,6 +91,8 @@ class ColeccionesPage extends React.Component{
 						const coleccion = jres.payload[key];
 						cols_divs.push(
 							<div className="Coleccion" key={coleccion.ColCod} id={coleccion.ColCod} onClick={this.onColeccionClick}>
+								<div className="Nombre" >{coleccion.ColNom}</div>
+								<br></br>
 								<div className="Descripcion" >{coleccion.ColDsc}</div>
 								<div className="Icono" ><i className="material-icons" >arrow_forward_ios</i></div>
 							</div>

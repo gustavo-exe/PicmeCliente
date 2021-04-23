@@ -8,11 +8,16 @@
     align-items: center;
     justify-content: space-between;
 
-    .BackToNombre{
+    .BackToEncabezado{
         display: flex;
         align-items: center;
         flex-direction: row;
         justify-content: flex-end;
+        .Encabezado{
+            padding: 0.5rem;
+            color: #000; 
+        }
+
         .backToIcon{
             padding: 0.5rem;
             color: #000;    
